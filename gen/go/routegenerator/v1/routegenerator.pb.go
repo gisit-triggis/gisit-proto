@@ -175,7 +175,7 @@ func (x *RouteCost) GetTotalEstimatedCostUnits() float64 {
 
 type GenerateRoutesResponse struct {
 	state            protoimpl.MessageState `protogen:"open.v1"`
-	VisualizationPng []byte                 `protobuf:"bytes,1,opt,name=visualization_png,json=visualizationPng,proto3" json:"visualization_png,omitempty"`
+	VisualizationPng string                 `protobuf:"bytes,1,opt,name=visualization_png,json=visualizationPng,proto3" json:"visualization_png,omitempty"`
 	RoutesGeojson    string                 `protobuf:"bytes,2,opt,name=routes_geojson,json=routesGeojson,proto3" json:"routes_geojson,omitempty"`
 	RouteCosts       []*RouteCost           `protobuf:"bytes,3,rep,name=route_costs,json=routeCosts,proto3" json:"route_costs,omitempty"`
 	StatusMessage    string                 `protobuf:"bytes,4,opt,name=status_message,json=statusMessage,proto3" json:"status_message,omitempty"`
@@ -213,11 +213,11 @@ func (*GenerateRoutesResponse) Descriptor() ([]byte, []int) {
 	return file_routegenerator_v1_routegenerator_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *GenerateRoutesResponse) GetVisualizationPng() []byte {
+func (x *GenerateRoutesResponse) GetVisualizationPng() string {
 	if x != nil {
 		return x.VisualizationPng
 	}
-	return nil
+	return ""
 }
 
 func (x *GenerateRoutesResponse) GetRoutesGeojson() string {
@@ -260,7 +260,7 @@ const file_routegenerator_v1_routegenerator_proto_rawDesc = "" +
 	"!estimated_construction_cost_units\x18\x05 \x01(\x01R\x1eestimatedConstructionCostUnits\x12;\n" +
 	"\x1atotal_estimated_cost_units\x18\x06 \x01(\x01R\x17totalEstimatedCostUnits\"\xcf\x01\n" +
 	"\x16GenerateRoutesResponse\x12+\n" +
-	"\x11visualization_png\x18\x01 \x01(\fR\x10visualizationPng\x12%\n" +
+	"\x11visualization_png\x18\x01 \x01(\tR\x10visualizationPng\x12%\n" +
 	"\x0eroutes_geojson\x18\x02 \x01(\tR\rroutesGeojson\x12:\n" +
 	"\vroute_costs\x18\x03 \x03(\v2\x19.routegenerator.RouteCostR\n" +
 	"routeCosts\x12%\n" +
