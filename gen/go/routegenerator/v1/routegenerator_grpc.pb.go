@@ -20,6 +20,7 @@ const _ = grpc.SupportPackageIsVersion9
 
 const (
 	RouteGenerator_GenerateRoutes_FullMethodName = "/routegenerator.RouteGenerator/GenerateRoutes"
+	RouteGenerator_AskAssistant_FullMethodName   = "/routegenerator.RouteGenerator/AskAssistant"
 )
 
 // RouteGeneratorClient is the client API for RouteGenerator service.
@@ -27,6 +28,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type RouteGeneratorClient interface {
 	GenerateRoutes(ctx context.Context, in *GenerateRoutesRequest, opts ...grpc.CallOption) (*GenerateRoutesResponse, error)
+	AskAssistant(ctx context.Context, in *AssistantRequest, opts ...grpc.CallOption) (*AssistantResponse, error)
 }
 
 type routeGeneratorClient struct {
@@ -47,11 +49,22 @@ func (c *routeGeneratorClient) GenerateRoutes(ctx context.Context, in *GenerateR
 	return out, nil
 }
 
+func (c *routeGeneratorClient) AskAssistant(ctx context.Context, in *AssistantRequest, opts ...grpc.CallOption) (*AssistantResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AssistantResponse)
+	err := c.cc.Invoke(ctx, RouteGenerator_AskAssistant_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // RouteGeneratorServer is the server API for RouteGenerator service.
 // All implementations must embed UnimplementedRouteGeneratorServer
 // for forward compatibility.
 type RouteGeneratorServer interface {
 	GenerateRoutes(context.Context, *GenerateRoutesRequest) (*GenerateRoutesResponse, error)
+	AskAssistant(context.Context, *AssistantRequest) (*AssistantResponse, error)
 	mustEmbedUnimplementedRouteGeneratorServer()
 }
 
@@ -64,6 +77,9 @@ type UnimplementedRouteGeneratorServer struct{}
 
 func (UnimplementedRouteGeneratorServer) GenerateRoutes(context.Context, *GenerateRoutesRequest) (*GenerateRoutesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GenerateRoutes not implemented")
+}
+func (UnimplementedRouteGeneratorServer) AskAssistant(context.Context, *AssistantRequest) (*AssistantResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AskAssistant not implemented")
 }
 func (UnimplementedRouteGeneratorServer) mustEmbedUnimplementedRouteGeneratorServer() {}
 func (UnimplementedRouteGeneratorServer) testEmbeddedByValue()                        {}
@@ -104,6 +120,24 @@ func _RouteGenerator_GenerateRoutes_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _RouteGenerator_AskAssistant_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AssistantRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RouteGeneratorServer).AskAssistant(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RouteGenerator_AskAssistant_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RouteGeneratorServer).AskAssistant(ctx, req.(*AssistantRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // RouteGenerator_ServiceDesc is the grpc.ServiceDesc for RouteGenerator service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -114,6 +148,10 @@ var RouteGenerator_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GenerateRoutes",
 			Handler:    _RouteGenerator_GenerateRoutes_Handler,
+		},
+		{
+			MethodName: "AskAssistant",
+			Handler:    _RouteGenerator_AskAssistant_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -241,6 +241,126 @@ func (x *GenerateRoutesResponse) GetStatusMessage() string {
 	return ""
 }
 
+type AssistantRequest struct {
+	state                 protoimpl.MessageState `protogen:"open.v1"`
+	Question              string                 `protobuf:"bytes,1,opt,name=question,proto3" json:"question,omitempty"`
+	CurrentLocationLonLat []float64              `protobuf:"fixed64,2,rep,packed,name=current_location_lon_lat,json=currentLocationLonLat,proto3" json:"current_location_lon_lat,omitempty"`
+	RouteId               string                 `protobuf:"bytes,3,opt,name=route_id,json=routeId,proto3" json:"route_id,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
+}
+
+func (x *AssistantRequest) Reset() {
+	*x = AssistantRequest{}
+	mi := &file_routegenerator_v1_routegenerator_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AssistantRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AssistantRequest) ProtoMessage() {}
+
+func (x *AssistantRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_routegenerator_v1_routegenerator_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AssistantRequest.ProtoReflect.Descriptor instead.
+func (*AssistantRequest) Descriptor() ([]byte, []int) {
+	return file_routegenerator_v1_routegenerator_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *AssistantRequest) GetQuestion() string {
+	if x != nil {
+		return x.Question
+	}
+	return ""
+}
+
+func (x *AssistantRequest) GetCurrentLocationLonLat() []float64 {
+	if x != nil {
+		return x.CurrentLocationLonLat
+	}
+	return nil
+}
+
+func (x *AssistantRequest) GetRouteId() string {
+	if x != nil {
+		return x.RouteId
+	}
+	return ""
+}
+
+type AssistantResponse struct {
+	state              protoimpl.MessageState `protogen:"open.v1"`
+	Answer             string                 `protobuf:"bytes,1,opt,name=answer,proto3" json:"answer,omitempty"`
+	RecommendedActions []string               `protobuf:"bytes,2,rep,name=recommended_actions,json=recommendedActions,proto3" json:"recommended_actions,omitempty"`
+	WarningLevel       string                 `protobuf:"bytes,3,opt,name=warning_level,json=warningLevel,proto3" json:"warning_level,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
+}
+
+func (x *AssistantResponse) Reset() {
+	*x = AssistantResponse{}
+	mi := &file_routegenerator_v1_routegenerator_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AssistantResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AssistantResponse) ProtoMessage() {}
+
+func (x *AssistantResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_routegenerator_v1_routegenerator_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AssistantResponse.ProtoReflect.Descriptor instead.
+func (*AssistantResponse) Descriptor() ([]byte, []int) {
+	return file_routegenerator_v1_routegenerator_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *AssistantResponse) GetAnswer() string {
+	if x != nil {
+		return x.Answer
+	}
+	return ""
+}
+
+func (x *AssistantResponse) GetRecommendedActions() []string {
+	if x != nil {
+		return x.RecommendedActions
+	}
+	return nil
+}
+
+func (x *AssistantResponse) GetWarningLevel() string {
+	if x != nil {
+		return x.WarningLevel
+	}
+	return ""
+}
+
 var File_routegenerator_v1_routegenerator_proto protoreflect.FileDescriptor
 
 const file_routegenerator_v1_routegenerator_proto_rawDesc = "" +
@@ -264,9 +384,18 @@ const file_routegenerator_v1_routegenerator_proto_rawDesc = "" +
 	"\x0eroutes_geojson\x18\x02 \x01(\tR\rroutesGeojson\x12:\n" +
 	"\vroute_costs\x18\x03 \x03(\v2\x19.routegenerator.RouteCostR\n" +
 	"routeCosts\x12%\n" +
-	"\x0estatus_message\x18\x04 \x01(\tR\rstatusMessage2q\n" +
+	"\x0estatus_message\x18\x04 \x01(\tR\rstatusMessage\"\x82\x01\n" +
+	"\x10AssistantRequest\x12\x1a\n" +
+	"\bquestion\x18\x01 \x01(\tR\bquestion\x127\n" +
+	"\x18current_location_lon_lat\x18\x02 \x03(\x01R\x15currentLocationLonLat\x12\x19\n" +
+	"\broute_id\x18\x03 \x01(\tR\arouteId\"\x81\x01\n" +
+	"\x11AssistantResponse\x12\x16\n" +
+	"\x06answer\x18\x01 \x01(\tR\x06answer\x12/\n" +
+	"\x13recommended_actions\x18\x02 \x03(\tR\x12recommendedActions\x12#\n" +
+	"\rwarning_level\x18\x03 \x01(\tR\fwarningLevel2\xc6\x01\n" +
 	"\x0eRouteGenerator\x12_\n" +
-	"\x0eGenerateRoutes\x12%.routegenerator.GenerateRoutesRequest\x1a&.routegenerator.GenerateRoutesResponseB^Z$./routegenerator/v1;routegeneratorv1\xca\x02\x13GRPC\\RouteGenerator\xe2\x02\x1fGRPC\\RouteGenerator\\GPBMetadatab\x06proto3"
+	"\x0eGenerateRoutes\x12%.routegenerator.GenerateRoutesRequest\x1a&.routegenerator.GenerateRoutesResponse\x12S\n" +
+	"\fAskAssistant\x12 .routegenerator.AssistantRequest\x1a!.routegenerator.AssistantResponseB^Z$./routegenerator/v1;routegeneratorv1\xca\x02\x13GRPC\\RouteGenerator\xe2\x02\x1fGRPC\\RouteGenerator\\GPBMetadatab\x06proto3"
 
 var (
 	file_routegenerator_v1_routegenerator_proto_rawDescOnce sync.Once
@@ -280,18 +409,22 @@ func file_routegenerator_v1_routegenerator_proto_rawDescGZIP() []byte {
 	return file_routegenerator_v1_routegenerator_proto_rawDescData
 }
 
-var file_routegenerator_v1_routegenerator_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_routegenerator_v1_routegenerator_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_routegenerator_v1_routegenerator_proto_goTypes = []any{
 	(*GenerateRoutesRequest)(nil),  // 0: routegenerator.GenerateRoutesRequest
 	(*RouteCost)(nil),              // 1: routegenerator.RouteCost
 	(*GenerateRoutesResponse)(nil), // 2: routegenerator.GenerateRoutesResponse
+	(*AssistantRequest)(nil),       // 3: routegenerator.AssistantRequest
+	(*AssistantResponse)(nil),      // 4: routegenerator.AssistantResponse
 }
 var file_routegenerator_v1_routegenerator_proto_depIdxs = []int32{
 	1, // 0: routegenerator.GenerateRoutesResponse.route_costs:type_name -> routegenerator.RouteCost
 	0, // 1: routegenerator.RouteGenerator.GenerateRoutes:input_type -> routegenerator.GenerateRoutesRequest
-	2, // 2: routegenerator.RouteGenerator.GenerateRoutes:output_type -> routegenerator.GenerateRoutesResponse
-	2, // [2:3] is the sub-list for method output_type
-	1, // [1:2] is the sub-list for method input_type
+	3, // 2: routegenerator.RouteGenerator.AskAssistant:input_type -> routegenerator.AssistantRequest
+	2, // 3: routegenerator.RouteGenerator.GenerateRoutes:output_type -> routegenerator.GenerateRoutesResponse
+	4, // 4: routegenerator.RouteGenerator.AskAssistant:output_type -> routegenerator.AssistantResponse
+	3, // [3:5] is the sub-list for method output_type
+	1, // [1:3] is the sub-list for method input_type
 	1, // [1:1] is the sub-list for extension type_name
 	1, // [1:1] is the sub-list for extension extendee
 	0, // [0:1] is the sub-list for field type_name
@@ -308,7 +441,7 @@ func file_routegenerator_v1_routegenerator_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_routegenerator_v1_routegenerator_proto_rawDesc), len(file_routegenerator_v1_routegenerator_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   3,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
